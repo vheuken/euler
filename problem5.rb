@@ -1,19 +1,17 @@
-MAX_NUM = 20
-
 def divisible?(num, divisor)
 	num % divisor == 0
 end
 
 found = false
-n = MAX_NUM-2
+n = 20
 
 until found do
-	n = n + 2
+	n = n + 20
 
-	(1..MAX_NUM).each do |i|
+	(1..20).each do |i|
 		if !divisible?(n, i)
 			break
-		elsif i == MAX_NUM
+		elsif i == 20
 			found = true
 		end
 	end
