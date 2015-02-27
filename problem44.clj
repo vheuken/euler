@@ -4,13 +4,14 @@
   (if (nil? i) 
     (def m 0)
     (def m i))
-
-  (if (< m n)
-    (if (== n (p m))
-      true
-      (if (pentagonal? n (+ m 1))
-        true
-        false))))
+  
+  (loop [n n m m]
+    (cond
+      (< m n)
+        (if (== n (p m))
+          true
+          (recur n (inc m)))
+      :else false)))
 
 (println (pentagonal? 4))
 
