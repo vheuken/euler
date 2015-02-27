@@ -1,11 +1,7 @@
 (defn p [n] (/ (* n (- (* 3 n) 1)) 2))
 
-(defn pentagonal? [n & [i]]
-  (if (nil? i) 
-    (def m 0)
-    (def m i))
-  
-  (loop [n n m m]
+(defn pentagonal? [n]
+  (loop [n n m 0]
     (cond
       (< m n)
         (if (== n (p m))
