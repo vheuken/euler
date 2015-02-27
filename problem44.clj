@@ -1,12 +1,12 @@
 (defn p [n] (/ (* n (- (* 3 n) 1)) 2))
 
 (defn pentagonal? [n]
-  (loop [m 0]
+  (loop [i 0]
     (cond
-      (< m n)
-        (if (== n (p m))
+      (< i n)
+        (if (== n (p i))
           true
-          (recur (inc m)))
+          (recur (inc i)))
       :else false)))
 
 (println (pentagonal? 4))
