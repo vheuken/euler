@@ -1,14 +1,15 @@
 (defn p [n] (/ (* n (- (* 3 n) 1)) 2))
 
 (defn pentagonal? [n]
-  (loop [i 0]
+  (loop [i 1]
     (cond
-      (< i n)
+      (<= i n)
         (if (== n (p i))
           true
           (recur (inc i)))
       :else false)))
 
-(println (pentagonal? 4))
 
-(println (pentagonal? 5))
+(loop [n 1 modifier 4]
+  (println (pentagonal? n))
+  (recur (+ n modifier) (+ 3 modifier)))
