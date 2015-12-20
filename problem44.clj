@@ -1,15 +1,33 @@
 (defn p [n] (/ (* n (- (* 3 n) 1)) 2))
 
+(defn pentagonals
+  ([]  (pentagonals 1))
+  ([n] (lazy-seq (cons (p n) (pentagonals (inc n))))))
+
 (defn pentagonal? [n]
-  (loop [i 1]
-    (cond
-      (<= i n)
-        (if (== n (p i))
+  (loop [i (if (odd? n) 1 3)
+         c 0]
+    (let [pi (first (take 1 (pentagonals i)))]
+      (cond
+        (= n pi)
           true
-          (recur (inc i)))
-      :else false)))
+        (> n pi)
+          (recur (if (odd? c) (+ 3 i) (inc i))
+                 (inc c))
+        :else
+          false))))
 
+(defn run []
+  (loop [j 1 k 1]
+    (let [pj (first (take 1 (pentagonals j)))
+          pk (first (take 1 (pentagonals k)))
+          sum (+ pk pj)
+          difference (- pk pj)]
+      (if (and (pentagonal? sum)
+               (pentagonal? difference))
+        (println "D = " difference)
+        (if (>= j k)
+          (recur 1 (inc k))
+          (recur (inc j) k))))))
 
-(loop [n 1 modifier 4]
-  (println (pentagonal? n))
-  (recur (+ n modifier) (+ 3 modifier)))
+(run)
