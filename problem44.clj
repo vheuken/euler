@@ -4,16 +4,14 @@
   ([]  (pentagonals 1))
   ([n] (lazy-seq (cons (p n) (pentagonals (inc n))))))
 
-(defn pentagonal? [n]
-  (loop [i (if (odd? n) 1 3)
-         c 0]
+(defn pentagonal? [n lower-bound]
+  (loop [i lower-bound]
     (let [pi (p i)]
       (cond
         (= n pi)
           true
         (> n pi)
-          (recur (if (odd? c) (+ 3 i) (inc i))
-                 (inc c))
+          (recur (inc i))
         :else
           false))))
 
@@ -21,8 +19,8 @@
   (loop [j 1 k 1]
     (let [pj (p j)
           pk (p k)]
-      (if (and (pentagonal? (+ pk pj))
-               (pentagonal? (- pk pj)))
+      (if (and (pentagonal? (+ pk pj) k)
+               (pentagonal? (- pk pj) 1))
         (do
           (println "J = " j)
           (println "K = " k)
