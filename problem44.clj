@@ -7,7 +7,7 @@
 (defn pentagonal? [n]
   (loop [i (if (odd? n) 1 3)
          c 0]
-    (let [pi (first (take 1 (pentagonals i)))]
+    (let [pi (p i)]
       (cond
         (= n pi)
           true
@@ -19,13 +19,14 @@
 
 (defn run []
   (loop [j 1 k 1]
-    (let [pj (first (take 1 (pentagonals j)))
-          pk (first (take 1 (pentagonals k)))
-          sum (+ pk pj)
-          difference (- pk pj)]
-      (if (and (pentagonal? sum)
-               (pentagonal? difference))
-        (println "D = " difference)
+    (let [pj (p j)
+          pk (p k)]
+      (if (and (pentagonal? (+ pk pj))
+               (pentagonal? (- pk pj)))
+        (do
+          (println "J = " j)
+          (println "K = " k)
+          (println "D = " (- pk pj)))
         (if (>= j k)
           (recur 1 (inc k))
           (recur (inc j) k))))))
