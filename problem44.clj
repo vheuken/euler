@@ -8,10 +8,10 @@
   (loop [i lower-bound]
     (let [pi (p i)]
       (cond
-        (= n pi)
-          true
         (> n pi)
           (recur (inc i))
+        (= n pi)
+          true
         :else
           false))))
 
