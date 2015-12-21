@@ -5,8 +5,8 @@
   ([n] (lazy-seq (cons (p n) (pentagonals (inc n))))))
 
 (defn pentagonal? [n lower-bound]
-  (let [f (first  (pentagonals lower-bound))
-        s (second (pentagonals lower-bound))]
+  (let [f (p lower-bound)
+        s (p (+ 1 lower-bound))]
     (loop [i (cond
                (and (odd? f) (odd? s))
                  (if (odd? n)
